@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13565276347210" configfile="/WebPrimeFaces/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="Challenges.xhtml" x="122" y="178" id="pf13565276647251" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf13565276647262" path="/Challenges.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="FilterBySkills.xhtml" x="338" y="178" id="pf13565276647263" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13565276647262" path="/FilterBySkills.xhtml"/>
+  <links id="pf13565276647262" target="pf13565276647263" source="pf13565276647251" outcome="create"/>
+</pageflow:Pageflow>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#Challenges.xhtml" PATH="/Challenges.xhtml"
+  SHAPE="264,104,50,25" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#Challenges.xhtml:0" NAME="item"
+   PATH="/Challenges.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="FilterBySkills::#FilterBySkills.xhtml"
+    NAME="output" PATH="/FilterBySkills.xhtml"
+    TARGET="rules:#FilterBySkills.xhtml" TITLE="FilterBySkills" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#FilterBySkills.xhtml"
+  PATH="/FilterBySkills.xhtml" SHAPE="125,106,0,0"
+  model-entity="JSFProcessGroup" persistent="true"/>
+</PROCESS>

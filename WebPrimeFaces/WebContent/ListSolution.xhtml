@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body>
+#{redirect.testUser()}
+<center>
+<h2>List of Solution Proposal</h2>
+
+<h:form>
+
+ <p:dataTable value="#{ListSolution.dataModel}" var="sol" style="width:500px" >
+            <p:column width="500" >
+                <f:facet   name="header">Solution</f:facet>
+                <h:outputText  value="#{sol.description}" />
+            </p:column>
+            <p:column>
+            <f:facet name="header">Rating Solution</f:facet>
+           <p:rating  value="#{ListSolution.feedback.value}"   >
+            	<p:ajax event="rate" listener="#{ListSolution.onrate}" /> 
+            	<p:ajax event="cancel" listener="#{ListSolution.oncancel}" />
+            </p:rating>
+            </p:column>
+             
+        </p:dataTable >
+  </h:form>
+</center>
+</body> 
+</html>
+ 

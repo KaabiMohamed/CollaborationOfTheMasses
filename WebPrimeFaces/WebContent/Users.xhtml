@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<p:dock position="top" itemWidth="100">
+	<p:menuitem value="Home" icon="/images/home.png" url="http://localhost:2000/WebPrimeFaces/faces/AdminMenu.xhtml"/>
+	<p:menuitem value="Validate Challenge" icon="/images/challenge.png" url="http://localhost:2000/WebPrimeFaces/faces/ValidationPage.xhtml"/>
+    <p:menuitem value="Manage Users" icon="/images/manageUsers.png" url="http://localhost:2000/WebPrimeFaces/faces/Users.xhtml"/>
+    
+</p:dock>
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/css/main.css" />
+</h:head>
+<h:body>
+#{redirect.testAdmin()}
+<div align="right"><p:commandButton value="Disconnect" actionListener="#{redirect.destroySession}" /></div>
+<br /><br /><br /> <br /> <br /><br /><br />
+<h:form id="form" >
+<div align="center">
+     <p:fieldset legend="Users" style="background:url('../images/background.jpg')"  > 
+     <br /><br />
+	
+			<p:commandButton value="New" onclick="newUser.show()"></p:commandButton>
+			<p:dataTable value="#{manageUsers.users}" paginator="true" rows="10"
+				var="u" id="usersTable" selectionMode="single" rowKey="#{u.login}"
+				selection="#{manageUsers.user}"
+				filteredValue="#{manageUsers.filteredU}">
+
+				<p:ajax event="rowSelect" update=":form:display2"
+					oncomplete="updateUser.show()" />
+
+				<f:facet name="header">List of Users</f:facet>
+
+
+
+
+
+				<p:column headerText="Last Name">
+                      #{u.firstName}
+           </p:column>
+				<p:column headerText="Skills" sortBy="#{u.skills}"
+					filterBy="#{u.skills}" id="skills">
+                      #{u.lastName}
+           </p:column>
+				<p:column headerText="Interests" sortBy="#{u.interests}"
+					filterBy="#{u.interests}" id="interests">
+                      #{u.login}
+           </p:column>
+				<p:column headerText="Expericence" sortBy="#{u.expericence}"
+					filterBy="#{u.expericence}" id="expericence">
+                      #{u.passWord}
+           </p:column>
+
+			</p:dataTable>
+
+		</p:fieldset>
+</div>
+		<p:dialog header="New User" widgetVar="newUser" resizable="false"
+			showEffect="fade" hideEffect="fade">
+
+			<h:panelGrid id="display" columns="2" cellpadding="4">
+
+				<h:outputLabel value="Login" />
+				<h:inputText value="#{manageUsers.newUser.login}" />
+				<h:outputLabel value="Password" />
+				<h:inputText value="#{manageUsers.newUser.passWord}" />
+				<h:outputLabel value="First Name" />
+				<h:inputText value="#{manageUsers.newUser.firstName}" />
+				<h:outputLabel value="Last Name" />
+				<h:inputText value="#{manageUsers.newUser.lastName}" />
+				<p:commandButton actionListener="#{manageUsers.create}"
+					oncomplete="newUser.hide()" update="usersTable" value="Create" />
+
+
+			</h:panelGrid>
+
+		</p:dialog>
+
+		<p:dialog header="Update User" widgetVar="updateUser"
+			resizable="false" showEffect="fade" hideEffect="fade">
+
+			<h:panelGrid id="display2" columns="2" cellpadding="4">
+
+				<h:outputLabel value="Login" />
+				<h:outputLabel value="#{manageUsers.user.login}" />
+				<h:outputLabel value="Password" />
+				<h:inputText value="#{manageUsers.user.passWord}" />
+				<h:outputLabel value="First Name" />
+				<h:inputText value="#{manageUsers.user.firstName}" />
+				<h:outputLabel value="Last Name" />
+				<h:inputText value="#{manageUsers.user.lastName}" />
+				<p:commandButton actionListener="#{manageUsers.update}"
+					oncomplete="updateUser.hide()" update="usersTable" value="Update" />
+				<p:commandButton actionListener="#{manageUsers.delete}"
+					oncomplete="updateUser.hide()" update="usersTable" value="Delete"  />
+
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+
+
+</h:body>
+</html>

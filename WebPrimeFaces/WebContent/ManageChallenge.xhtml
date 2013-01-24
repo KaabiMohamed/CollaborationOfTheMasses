@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+    <h:form >
+<p:panel >
+        <p:dataTable value="#{updateChlng.datamodel}" var="challenge" id="mydata" selectionMode="single" 
+        rowKey="#{challenge.id}" selection="#{updateChlng.selectedRow}"  >
+            <p:column >
+                <f:facet   name="header">Id</f:facet>
+                <h:outputText  value="#{challenge.id}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">Desciption</f:facet>
+                <h:outputLabel  value="#{challenge.description}"   />
+            </p:column> 
+            <p:column>
+                <f:facet name="header">submitter</f:facet>
+               <h:outputText  value="#{challenge.submitter}"   />
+            </p:column>  
+             <p:column>
+                <f:facet name="header">Award</f:facet>
+                <h:outputText   value="#{challenge.award}"   />
+            </p:column>
+                         <p:column>
+                <f:facet name="header">Start Date</f:facet>
+               <h:outputText value="#{challenge.date}"   />
+            </p:column>
+             <p:column>
+                <f:facet name="header">Dead Line</f:facet>
+                <h:outputText value="#{challenge.deadLine}"   />
+            </p:column>
+        </p:dataTable >
+       
+        <p:commandButton value="Update"  onclick="dialog.show()" icon="ui-icon-check" style="margin:0;width:185"  />
+  </p:panel>      
+        
+         
+<p:dialog widgetVar="dialog" modal="true">     
+<p:panelGrid columns="2" id="uds" >
+            <f:facet name="header">  
+               Challenges 
+           </f:facet>
+<h:outputLabel value="Description" /> 
+<p:inputTextarea accesskey="1"  autoResize="" value="#{updateChlng.challenge.description}" />
+<h:outputLabel value="Award" /> 
+<p:inputTextarea   autoResize="" value="#{updateChlng.challenge.award}"  />
+<h:outputLabel value="Date" />
+<p:calendar   value="#{updateChlng.challenge.date}" />
+<h:outputLabel value="Dead Line" />		
+<p:inputText  value="#{updateChlng.challenge.deadLine}" />
+ <p:commandButton   actionListener="#{updateChlng.updateChlng}" oncomplete="dialog.hide()" value="update" update="mydata" icon="ui-icon-check" style="margin:0" />
+<p:commandButton type="reset" value="Reset" icon="ui-icon-cancel" style="margin:0" />
+
+  <f:facet name="footer">  
+               * you're Updating a challenge
+ </f:facet>
+</p:panelGrid>
+  </p:dialog>            
+               
+  
+    </h:form>
+</h:body>
+</html>

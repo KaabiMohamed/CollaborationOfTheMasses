@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<p:dock position="top" itemWidth="100">
+	<p:menuitem value="Back" icon="/images/back.png" url="http://localhost:2000/WebPrimeFaces/faces/Challenges.xhtml"/>
+</p:dock>
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/css/main.css" />
+</h:head>
+<body>
+#{redirect.testUser()}
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<div align="center">
+		<h:form id="form">
+			<p:fieldset legend="Challenges" style="width:650px">
+				<p:dataTable var="u" value="#{Final.dataModel2}" rowKey="#{u.id}"
+					paginator="true" rows="10" selection="#{Final.selectedRow}"
+					selectionMode="single" filteredValue="#{Final.filteredCh}"
+					id="Table">
+
+					<p:ajax event="rowSelect" update=":form:display"
+						oncomplete="dialog.show()" />
+
+
+
+					<p:column headerText="description" sortBy="#{u.description}"
+						filterBy="#{u.description}" id="description">
+                      #{u.description}
+           </p:column>
+				</p:dataTable>
+			</p:fieldset>
+
+
+			<p:dialog id="display" header="Solution" widgetVar="dialog"
+				resizable="false" showEffect="fade" hideEffect="fade">
+				<p:dataTable value="#{Final.dataModel}" var="sol"
+					style="width:500px">
+					<p:column width="300">
+						<f:facet name="header">Solution</f:facet>
+						<h:outputText value="#{sol.description}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Select Solution</f:facet>
+						<p:commandButton value="Best Solution"
+							action="#{Final.laSolutionFinale}" />
+					</p:column>
+				</p:dataTable>
+			</p:dialog>
+
+		</h:form>
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+    <h:form ><p:panelGrid style="width:500px" columns="2"  >
+            <f:facet name="header">  
+               Administrators 
+           </f:facet>
+            <h:outputLabel  value="Login" />
+            <p:inputText id="login" value="#{manager.administrator.login}" />
+
+            <h:outputLabel  value="Password" />
+            <p:inputText id="passWord" value="#{manager.administrator.passWord}" />
+
+            <p:commandButton actionListener="#{manager.create}" update="mydata"  value="Save" icon="ui-icon-check" style="margin:0" />
+		   <p:commandButton type="reset" value="Reset" icon="ui-icon-cancel" style="margin:0" />
+           
+        </p:panelGrid>
+        <br /><br />
+
+        <p:dataTable value="#{manager.datamodel}" var="admin" id="mydata" selectionMode="single" 
+        rowKey="#{admin.login}" selection="#{manager.selectedRow}"  style="width:500px" >
+            <p:column >
+                <f:facet   name="header">Login</f:facet>
+                <h:outputText  value="#{admin.login}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">Password</f:facet>
+                <h:outputText value="#{admin.passWord}"  />
+            </p:column>   
+             <p:column>
+                <f:facet name="header">New Password</f:facet>
+                <h:inputText value="#{manager.newPwd}"   />
+            </p:column>
+        </p:dataTable >
+        <br />
+        <p:panelGrid  style="width:500px" columns="2"  > 
+        
+        <p:commandButton actionListener="#{manager.update}" update="mydata" value="update" icon="ui-icon-check" style="margin:0;width:185" />
+        <p:commandButton actionListener="#{manager.delete}" update="mydata" value="Delete" icon="ui-icon-cancel" style="margin:0;width:185" />
+        </p:panelGrid>
+    </h:form>
+</h:body>
+</html>

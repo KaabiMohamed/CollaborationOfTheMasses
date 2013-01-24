@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<h:body>
+<h:form id="form" >
+<p:growl  id="ms" showSummary="true" showDetail="true" />
+<h:outputLink value="#{fileUploadController.url}" onclick="window.open(this.href); return false;">Get Code Google Drive</h:outputLink>
+<h:outputText value="Code" />
+<h:inputText value="#{fileUploadController.code}" />
+<p:commandButton value="Login " action="#{fileUploadController.login}" update="ms"></p:commandButton>
+<p:fileUpload  label="choix" uploadLabel="upload" cancelLabel="annuler" update="ms" fileUploadListener="#{fileUploadController.upload}"  style="width:600px" />
+<p:panel id="p" header="Information sur le fixhier"  style="width:500px">
+<h:panelGrid columns="2">
+<h:outputText value="Nom du fichier" />
+<p:inputText value="#{fileUploadController.fileName}"></p:inputText>
+<h:outputText value="Description" />
+<p:inputTextarea value="#{fileUploadController.descriptionFile}" rows="5" cols="6" style="width:200px"></p:inputTextarea>
+<p:commandButton value="Upload" action="#{fileUploadController.uplodInGoogleDrive}"  update="ms" ></p:commandButton>
+</h:panelGrid>
+
+</p:panel>
+</h:form>
+</h:body>
+</html>

@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<p:dock position="top" itemWidth="100">
+	<p:menuitem value="Back" icon="/images/back.png" url="http://localhost:2000/WebPrimeFaces/faces/Challenges.xhtml"/>
+</p:dock>
+<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/main.css" />
+
+</h:head>
+
+<h:body>
+#{redirect.testUser()}
+<br /><br /><br /> <br /> <br /><br /><br />
+<div align="center">
+<h:form id="form">
+ <p:fieldset legend="Challenges" style="width:650px" > 
+     <p:dataTable var="u" 
+					 value="#{Rating.dataModel2}"
+					 rowKey="#{u.id}" 
+					 paginator="true" 
+					 rows="10"
+					 selection="#{Rating.selectedRow}" 
+					 selectionMode="single"
+					 filteredValue="#{Rating.filteredCh}" 
+					 id="Table">
+
+			<p:ajax event="rowSelect" 
+					update=":form:display"
+				    oncomplete="dialog.show()" />
+
+			
+			
+				<p:column headerText="description" 
+				       sortBy="#{u.description}"
+				      filterBy="#{u.description}" 
+				      id="description"
+					  >
+                      #{u.description}
+           </p:column>
+           </p:dataTable>
+           </p:fieldset>
+
+
+<p:dialog id="display" header="Propose Solution" 
+				  widgetVar="dialog"
+			      resizable="false" 
+			      showEffect="fade"
+			      hideEffect="fade">
+<p:dataTable value="#{Rating.dataModel}"  var="sol" style="width:500px" >
+            <p:column width="150" >
+                <f:facet   name="header">Solution</f:facet>
+                <h:outputText  value="#{sol.description}" />
+            </p:column>
+            <p:column width="150">
+            <f:facet name="header">Rating Solution</f:facet>
+           <p:rating  value="#{Rating.selecSol}"   >
+            	<p:ajax event="rate"  listener="#{Rating.onrate}" /> 
+            	<p:ajax event="cancel" listener="#{Rating.oncancel}" />
+            </p:rating>
+            
+            </p:column> 
+         
+        </p:dataTable >
+  </p:dialog>
+</h:form>
+ </div>        
+</h:body>
+</html>

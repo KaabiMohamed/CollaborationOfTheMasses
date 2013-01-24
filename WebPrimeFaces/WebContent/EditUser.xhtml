@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head><p:dock position="top" itemWidth="100">
+	<p:menuitem value="Home" icon="/images/home.png" url="http://localhost:2000/WebPrimeFaces/faces/UserMenu.xhtml"/>
+	<p:menuitem value="Challenge" icon="/images/challenge.png" url="http://localhost:2000/WebPrimeFaces/faces/Challenges.xhtml"/>
+	<p:menuitem value="Solutions" icon="/images/Solution.png" url="http://localhost:2000/WebPrimeFaces/faces/ProposeSolution.xhtml"/>
+	<p:menuitem value="Profile" icon="/images/users.png" url="http://localhost:2000/WebPrimeFaces/faces/EditUser.xhtml"/>
+<p:menuitem value="Messages" icon="/images/message.png"
+			url="http://localhost:2000/WebPrimeFaces/faces/Messages.xhtml" />
+</p:dock>
+<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/main.css" />
+
+</h:head>
+
+<body>
+#{redirect.testUser()}
+<div align="right"><p:commandButton value="Disconnect" actionListener="#{redirect.destroySession}" /></div>
+<br /><br /><br /> <br /> <br /><br /><br />
+  
+       
+          <div align="center">
+     <p:fieldset legend="User Info" style="width:650px;background:url('../images/background.jpg')" > 
+     <h:form >
+     <p:panelGrid  columns="2"  >
+        
+          <h:outputLabel value="First Name" /> 
+      <p:inputText accesskey="first" style="width:500px"  value="#{skills.user.firstName}" />
+       <h:outputLabel value="Last Name" /> 
+        <p:inputText accesskey="last" style="width:500px"  value="#{skills.user.lastName}" />
+        <h:outputLabel value="Login" /> 
+      <h:outputText   style="width:500px"  value="#{skills.user.login}"  />
+       <h:outputLabel value="Password" /> 
+      <p:inputText type="password" accesskey="pwd" style="width:500px"  value="#{skills.user.passWord}" />
+     
+     <h:outputLabel value="Skills" /> 
+    <p:inputText accesskey="skills" style="width:500px"  value="#{skills.user.skills}"  />
+     
+
+     <h:outputLabel value="Experience" />		
+     <p:inputText accesskey="expericence" style="width:500px" value="#{skills.user.expericence}"  />
+<h:outputLabel value="Interests" /> 
+     <p:inputText accesskey="exnce" style="width:500px" value="#{skills.user.interests}"  />
+
+    
+    <p:commandButton actionListener="#{skills.validate}"  value="Update" icon="ui-icon-check" style="margin:0" />
+<p:commandButton type="reset" value="Reset" icon="ui-icon-cancel" style="margin:0" />
+   </p:panelGrid> </h:form> </p:fieldset>
+    </div>
+    
+  
+
+</body> 
+</html>

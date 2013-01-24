@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body>
+#{redirect.testUser()}
+  
+   <h:form>
+     <p:fieldset legend="User Info" style="width:650px" > 
+     <p:dataTable var="u" 
+					 value="#{skills.users}"
+					 rowKey="#{u.login}" 
+					 paginator="true" 
+					 rows="10"
+					 selection="#{skills.selectedU}" 
+					 selectionMode="single"
+					 filteredValue="#{skills.filteredU}" 
+					 id="usersTable">
+
+			<p:ajax event="rowSelect" 
+					
+				    oncomplete="dialog.show()" />
+
+			<f:facet name="header">List of Users</f:facet>
+			
+				<p:column headerText="First Name" 
+					  >
+                      #{u.firstName}
+           </p:column>
+
+           
+           
+			<p:column headerText="Last Name" 
+					  >
+                      #{u.lastName}
+           </p:column>
+           <p:column headerText="Skills" 
+           			  sortBy="#{u.skills}"
+				      filterBy="#{u.skills}" 
+				      id="skills" >
+                      #{u.skills}
+           </p:column>
+             <p:column headerText="Interests" 
+					  sortBy="#{u.interests}"
+				      filterBy="#{u.interests}" 
+				      id="interests">
+                      #{u.interests}
+           </p:column>
+             <p:column headerText="Expericence" 
+					  sortBy="#{u.expericence}"
+				      filterBy="#{u.expericence}" 
+				      id="expericence">
+                      #{u.expericence}
+           </p:column>
+
+		</p:dataTable>
+    </p:fieldset>
+    
+    <p:dialog header="Inviting/Notify" 
+				  widgetVar="dialog"
+			      resizable="false" 
+			      showEffect="fade"
+			      hideEffect="fade">
+			     
+ <h:panelGrid id="display" columns="2" cellpadding="4">
+ <h:outputLabel value="Inviting" />
+  <h:outputLabel value="" />
+ <h:outputLabel value="Challenge" />
+ <h:inputText value="#{skills.nomchallenge}" />
+ <h:outputLabel value="Are you sure to invite this provider ?" />
+   <p:commandButton actionListener="#{skills.inviting}" oncomplete="dialog.hide()" value="Yes" />
+ 
+  <h:outputLabel value="Notify" />
+  <h:outputLabel value="" />
+  <h:outputLabel value="Sujet Notification" />
+  <h:inputText value="#{skills.snotify}" />
+  <p:commandButton actionListener="#{skills.notify}" oncomplete="dialog.hide()" value="Notify proveider" />
+ </h:panelGrid>
+  </p:dialog>
+  
+  
+    </h:form>
+   
+
+</body> 
+</html>

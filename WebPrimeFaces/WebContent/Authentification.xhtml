@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+xmlns:fb="https://www.facebook.com/2008/fbml">
+<h:head>
+<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/main.css" />
+</h:head>
+<h:body>
+<h:form >
+<script src="http://connect.facebook.net/fr_FR/all.js"></script>
+<script>
+FB.init({
+appId : '110159945811766',
+status : true, 
+cookie : true, 
+xfbml : true 
+});
+function connect(){
+FB.getLoginStatus(function(response) {
+if (response.status === 'connected') {
+// the user is logged in and has authenticated your
+// app, and response.authResponse supplies
+// the user's ID, a valid access token, a signed
+// request, and the time the access token 
+// and signed request each expire
+var uid = response.authResponse.userID;
+var accessToken = response.authResponse.accessToken;
+
+alert("You are now connected to Facebook !");
+window.location = "http://localhost:2000/WebPrimeFaces/faces/FacebookLogged.xhtml";
+} else if (response.status === 'not_authorized') {
+// the user is logged in to Facebook, 
+// but has not authenticated your app
+alert("Please autorize COM app !");
+} else {
+alert("Please connect on facebook !");
+}
+});
+}	
+</script>
+<br></br><br></br><br></br><br></br><br></br><br></br>
+<div align="center" ><p:panelGrid style="width:400px" columns="2" >
+<f:facet name="header"> 
+Sign In
+</f:facet>
+<h:outputLabel value="Login" />
+<p:inputText id="login" value="#{auth.admin.login}" />
+<h:outputLabel value="Password" />
+<p:inputText id="passWord" value="#{auth.admin.passWord}" type="password" />
+<p:commandButton actionListener="#{auth.authentificate}" value="Login" icon="ui-icon-check" style="margin:0" />
+<p:commandButton type="reset" value="Reset" icon="ui-icon-cancel" style="margin:0" />
+
+
+<f:facet name="footer"> 
+* Please Sign in to access the website 
+</f:facet>
+</p:panelGrid>
+
+
+</div>
+<br></br><br></br>
+<div align="center" >
+<f:facet name="header"> 
+Use Facebook to login 
+</f:facet>
+<p:panelGrid  columns="1"  >
+<f:facet name="header"> 
+Use Facebook to login 
+</f:facet>
+<fb:login-button registration-url="inscription.xhtml" show-faces="true"  perms="email,user_birthday,read_stream"></fb:login-button>
+<p:commandButton onclick="connect()" value="use facebook" icon="ui-icon-check" style="margin:0" />
+</p:panelGrid>
+</div>
+
+
+</h:form>
+</h:body>
+</html>

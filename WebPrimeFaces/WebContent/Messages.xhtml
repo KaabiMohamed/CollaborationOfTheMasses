@@ -1,0 +1,172 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<p:dock position="top" itemWidth="100">
+		<p:menuitem value="Home" icon="/images/home.png"
+			url="http://localhost:2000/WebPrimeFaces/faces/UserMenu.xhtml" />
+		<p:menuitem value="Challenge" icon="/images/challenge.png"
+			url="http://localhost:2000/WebPrimeFaces/faces/Challenges.xhtml" />
+		<p:menuitem value="Solutions" icon="/images/Solution.png"
+			url="http://localhost:2000/WebPrimeFaces/faces/ProposeSolution.xhtml" />
+		<p:menuitem value="Profile" icon="/images/users.png"
+			url="http://localhost:2000/WebPrimeFaces/faces/EditUser.xhtml" />
+		<p:menuitem value="Messages" icon="/images/message.png"
+			url="http://localhost:2000/WebPrimeFaces/faces/Messages.xhtml" />
+	</p:dock>
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/css/main.css" />
+		
+
+</h:head>
+
+
+
+
+<h:body>
+#{redirect.testUser()}
+<div align="right"><p:commandButton value="Disconnect" actionListener="#{redirect.destroySession}" /></div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<h:form id="form">
+		<div align="center">
+			<p:fieldset legend="INBOX"
+				style="background:url('../images/background.jpg')">
+				<br />
+				<br />
+				<p:commandButton onclick="newMessage.show()"
+					value="Send a new message" />
+				<p:commandButton onclick="sendBox.show()" value="Send Box" />
+				<br />
+				<br />
+				<p:dataTable var="u" value="#{Messages.inbox}" rowKey="#{u.id}"
+					paginator="true" rows="8" selection="#{Messages.selectedMsg}"
+					selectionMode="single" filteredValue="#{Messages.filtredMsg}"
+					id="MsgTable" paginatorPosition="bottom" sortBy="#{u.id}">
+
+					<p:ajax event="rowSelect" update=":form:displayinfo"
+						oncomplete="infoMessage.show()" />
+
+
+
+					<p:column headerText="From" id="jk" filterBy="#{u.sender.login}">
+                      #{u.sender.login}
+           </p:column>
+
+
+					<p:column headerText="Object" id="award">
+                      #{u.object}
+           </p:column>
+					<p:column headerText="Message" id="startDate">
+                      #{u.message}
+           </p:column>
+
+					<p:column headerText="Date" id="deadLine">
+                      #{u.date}
+           </p:column>
+
+				</p:dataTable>
+
+			</p:fieldset>
+		</div>
+
+		<p:dialog header="Informations" widgetVar="newMessage"
+			resizable="false" showEffect="fade" hideEffect="fade">
+			<form>
+
+				<p:panelGrid columns="2" id="displayNew">
+					<h:outputLabel value="To:" />
+					<p:inputText value="#{Messages.login}" />
+					<h:outputLabel value="Object" />
+					<p:inputText value="#{Messages.newMessage.object}" />
+					<h:outputLabel value="Message" />
+					<p:inputTextarea style="width:200px"
+						value="#{Messages.newMessage.message}" />
+					<p:commandButton actionListener="#{Messages.NewMessage}"
+						value="Send Message" oncomplete="newMessage.hide()" />
+				</p:panelGrid>
+			</form>
+		</p:dialog>
+		<p:dialog header="Informations" widgetVar="infoMessage"
+			resizable="false" showEffect="fade" hideEffect="fade">
+			<form>
+
+				<p:panelGrid columns="2" id="displayinfo">
+
+					<h:outputLabel value="Object" />
+					<h:outputLabel value="#{Messages.selectedMsg.object}" />
+					<h:outputLabel value="Message" />
+					<h:outputLabel style="width:200px"
+						value="#{Messages.selectedMsg.message}" />
+					<p:commandButton onclick="ReplyMessage.show()" value="Reply"
+						oncomplete="infoMessage.hide()" />
+					<p:commandButton onclick="del.show()" value="Delete"
+						oncomplete="infoMessage.hide()" />
+				</p:panelGrid>
+			</form>
+		</p:dialog>
+
+	</h:form>
+	<p:dialog header="Reply" widgetVar="ReplyMessage" resizable="false"
+		showEffect="fade" hideEffect="fade">
+		<form>
+
+			<p:panelGrid columns="2" id="displayReply">
+
+				<h:outputLabel value="Object" />
+				<p:inputText value="#{Messages.replyMessage.object}" />
+				<h:outputLabel value="Message" />
+				<p:inputTextarea style="width:200px"
+					value="#{Messages.replyMessage.message}" />
+				<p:commandButton actionListener="#{Messages.Reply}" value="Reply"
+					oncomplete="ReplyMessage.hide()" />
+			</p:panelGrid>
+		</form>
+	</p:dialog>
+	<p:dialog header="Delete" widgetVar="del" resizable="false"
+		showEffect="fade" hideEffect="fade">
+		<h:outputLabel value="Are You sure? " />
+		<p:commandButton actionListener="#{Messages.delete}"
+			oncomplete="del.hide()" value="Yes" />
+	</p:dialog>
+	<p:dialog header="SendBox" widgetVar="sendBox" resizable="false"
+		showEffect="fade" hideEffect="fade">
+
+		<p:dataTable var="u" value="#{Messages.sendbox}" rowKey="#{u.id}"
+			paginator="true" rows="8" id="MsgTable" paginatorPosition="bottom"
+			sortBy="#{u.id}">
+
+
+
+
+
+			<p:column headerText="To" id="jk">
+                      #{u.receptor.login}
+           </p:column>
+
+
+			<p:column headerText="Object" id="award">
+                      #{u.object}
+           </p:column>
+			<p:column headerText="Message" id="startDate">
+                      #{u.message}
+           </p:column>
+
+			<p:column headerText="Date" id="deadLine">
+                      #{u.date}
+           </p:column>
+
+		</p:dataTable>
+
+
+	</p:dialog>
+
+</h:body>
+</html>

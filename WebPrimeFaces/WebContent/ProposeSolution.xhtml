@@ -1,0 +1,137 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<p:dock position="top" itemWidth="100">
+	<p:menuitem value="Home" icon="/images/home.png" url="http://localhost:2000/WebPrimeFaces/faces/UserMenu.xhtml"/>
+	<p:menuitem value="Challenge" icon="/images/challenge.png" url="http://localhost:2000/WebPrimeFaces/faces/Challenges.xhtml"/>
+	<p:menuitem value="Solutions" icon="/images/Solution.png" url="http://localhost:2000/WebPrimeFaces/faces/ProposeSolution.xhtml"/>
+	<p:menuitem value="Profile" icon="/images/users.png" url="http://localhost:2000/WebPrimeFaces/faces/EditUser.xhtml"/>
+<p:menuitem value="Messages" icon="/images/message.png"
+			url="http://localhost:2000/WebPrimeFaces/faces/Messages.xhtml" />
+</p:dock>
+<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/main.css" />
+
+</h:head>
+
+<h:body>
+#{redirect.testUser()}
+<div align="right"><p:commandButton value="Disconnect" actionListener="#{redirect.destroySession}" /></div>
+<br /><br /><br /> <br /> <br /><br /><br />
+<div align="center">
+<h:form >
+    <p:fieldset legend="Challenges" style="width:650px" > 
+     <p:dataTable var="u" 
+					 value="#{SolutionPropsal.challenges}"
+					 rowKey="#{u.id}" 
+					 paginator="true" 
+					 rows="10"
+					 selection="#{SolutionPropsal.selectedRow}" 
+					 selectionMode="single"
+					 filteredValue="#{SolutionPropsal.filteredCh}" 
+					 id="Table">
+
+			<p:ajax event="rowSelect" 
+					
+				    oncomplete="loginDialog.show()" />
+
+			
+			
+				<p:column headerText="description" 
+				       sortBy="#{u.description}"
+				      filterBy="#{u.description}" 
+				      id="description"
+					  >
+                      #{u.description}
+           </p:column>
+
+           
+           
+			<p:column headerText="Award" 
+			          sortBy="#{u.award}}"
+				      filterBy="#{u.award}" 
+				      id="award"
+					  >
+                      #{u.award}
+           </p:column>
+           
+           <p:column headerText="Login" 
+           			  sortBy="#{u.submitter.login}"
+				      filterBy="#{u.submitter.login}" 
+				      id="login" >
+                      #{u.submitter.login}
+           </p:column>
+             <p:column headerText="date" 
+					  sortBy="#{u.date}"
+				      filterBy="#{u.date}" 
+				      id="date">
+                      #{u.date}
+           </p:column>
+             <p:column headerText="daedLine" 
+					  sortBy="#{u.deadLine}"
+				      filterBy="#{u.deadLine}" 
+				      id="deadLine">
+                      #{u.deadLine}
+           </p:column>
+
+		</p:dataTable>
+		Click on a challenge to propose a solution
+    </p:fieldset>
+
+
+
+
+
+
+
+
+
+
+<p:dialog header="Google Drive login" 
+				  widgetVar="loginDialog"
+			      resizable="false" 
+			      showEffect="fade"
+			      hideEffect="fade">
+
+<h:form>
+<h:panelGrid columns="3" style="width:450px">
+<h:outputLink value="#{SolutionPropsal.url}" onclick="window.open(this.href); return false;"> Code Google Drive</h:outputLink>
+<h:outputText value="Code" />
+<p:inputText value="#{SolutionPropsal.code}" />
+<p:commandButton value="Login " actionListener="#{SolutionPropsal.login}" oncomplete="dialog.show()" ></p:commandButton>
+</h:panelGrid>
+</h:form><br></br>--------------------------------------------------------------------------------
+<br></br>*To upload a solution you should Go to the link<br></br> and allow access then get the authorization code
+</p:dialog >
+
+
+
+
+
+<p:dialog header="Propose Solution" 
+				  widgetVar="dialog"
+			      resizable="false" 
+			      showEffect="fade"
+			      hideEffect="fade">
+<h:form id="form" >
+<p:growl  id="ms" showSummary="true" showDetail="true" />
+
+
+<h:panelGrid columns="2" style="width:450px">
+<h:outputText value="Upload a file" />
+<p:fileUpload auto="true"  update="ms" fileUploadListener="#{SolutionPropsal.upload}"   />
+<h:outputText value="File Name" />
+<p:inputText value="#{SolutionPropsal.fileName}" style="width:300px"></p:inputText>
+<h:outputText value="Description"  />
+<p:inputTextarea value="#{SolutionPropsal.descriptionFile}" rows="5" cols="6" style="width:300px"></p:inputTextarea>
+<p:commandButton value="Upload" actionListener="#{SolutionPropsal.uplodInGoogleDrive}"   oncomplete="dialog.hide()" update="ms" ></p:commandButton>
+</h:panelGrid>
+
+
+</h:form></p:dialog>
+</h:form>
+        </div>         
+</h:body>
+</html>

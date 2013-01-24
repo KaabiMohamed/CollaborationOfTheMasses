@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head><p:dock position="top" itemWidth="100">
+	<p:menuitem value="Home" icon="/images/home.png" url="http://localhost:2000/WebPrimeFaces/faces/UserMenu.xhtml"/>
+	<p:menuitem value="Challenge" icon="/images/challenge.png" url="http://localhost:2000/WebPrimeFaces/faces/Challenges.xhtml"/>
+	<p:menuitem value="Solutions" icon="/images/Solution.png" url="http://localhost:2000/WebPrimeFaces/faces/ProposeSolution.xhtml"/>
+	<p:menuitem value="Profile" icon="/images/users.png" url="http://localhost:2000/WebPrimeFaces/faces/EditUser.xhtml"/>
+</p:dock>
+</h:head>
+
+<h:body>
+<br /><br /><br /> <br /> <br /><br /><br />
+<h:form id="form" >
+<div align="center">
+     <p:fieldset legend=" Update Challenge"   > 
+     <br /><br />
+     
+     <p:dataTable var="u" 
+					 value="#{updateChallenge.listChallenge}"
+					 rowKey="#{u.id}" 
+					 paginator="true" 
+					 rows="30"
+					 selection="#{updateChallenge.selectedRow}" 
+					 selectionMode="single"
+					 
+					 id="ChallengesTable">
+
+			<p:ajax event="rowSelect" 
+					
+				    oncomplete="dialog.show()" />
+
+			
+			
+				<p:column headerText="Description"  id="jk" filterBy=" #{u.description}" >
+                      #{u.description}
+           </p:column>
+
+           
+            <p:column headerText="Award" 
+           			  id="award">
+                      #{u.award}
+           </p:column>
+			<p:column headerText="Start Date" id="startDate" >
+                      #{u.date}
+           </p:column>
+          
+             <p:column headerText="Interests" 
+					   
+				      id="deadLine">
+                      #{u.deadLine}
+           </p:column>
+             <p:column headerText="Submitter" 
+					   
+				      id="submitter">
+                      #{u.submitter.login}
+           </p:column>
+
+		</p:dataTable>
+		
+    </p:fieldset>
+    </div>
+  <p:dialog header="Informations" 
+				  widgetVar="dialog"
+			      resizable="false" 
+			      showEffect="fade"
+			      hideEffect="fade">
+			      <form>
+ 
+ <p:panelGrid columns="2" >
+            <f:facet name="header">  
+               Challenges 
+           </f:facet>
+<h:outputLabel value="Description" /> 
+<p:inputTextarea accesskey="1" style="width:500px;height:370px" value="#{updateChallenge.selectedRow.description}" autoResize=""  />
+<h:outputLabel value="Award" /> 
+<p:inputTextarea accesskey="2" style="width:500px;height:80px" value="#{updateChallenge.selectedRow.award}" autoResize=""  />
+<h:outputLabel value="Date" />
+<p:calendar accesskey="3"  value="#{updateChallenge.selectedRow.date}"  />
+<h:outputLabel value="Dead Line" />		
+<p:inputText accesskey="4"  style="width:500px" value="#{updateChallenge.selectedRow.deadLine}" />
+
+ <p:commandButton update="ChallengesTable" actionListener="#{updateChallenge.update}" oncomplete="dialog.hide()" value="Save" icon="ui-icon-check" style="margin:0" />
+<p:commandButton type="reset" value="Reset" icon="ui-icon-cancel" style="margin:0" />
+
+  <f:facet name="footer">  
+               * you're Creating a challenge
+           </f:facet>
+</p:panelGrid>
+</form>
+
+
+  </p:dialog>
+
+
+
+
+  </h:form>
+  </h:body>
+  </html>     
+        

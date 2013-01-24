@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="ejbModule"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/oracle-lib"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/JBoss 7.1 Runtime">
+		<attributes>
+			<attribute name="owner.project.facets" value="#system#;jst.ejb"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre7">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.osgi.ejb.integration"/>
+	<classpathentry kind="lib" path="C:/Users/Personnal computer/Desktop/Nouveau dossier/OSGILIB/jbosgi-deployment-1.0.12.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Personnal computer/Desktop/Nouveau dossier/OSGILIB/jbosgi-framework-core-1.1.8.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Personnal computer/Desktop/Nouveau dossier/OSGILIB/jbosgi-resolver-api-1.0.13.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Personnal computer/Desktop/Nouveau dossier/OSGILIB/jbosgi-resolver-felix-1.0.13.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Personnal computer/Desktop/Nouveau dossier/OSGILIB/jbosgi-resolver-spi-1.0.13.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Personnal computer/Desktop/Nouveau dossier/OSGILIB/org.osgi.core-4.2.0.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

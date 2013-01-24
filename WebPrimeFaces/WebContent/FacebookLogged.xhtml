@@ -1,0 +1,130 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+
+
+<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/main.css" />
+</h:head>
+
+<h:body>
+<div align="right"><p:commandButton value="Disconnect" actionListener="#{redirect.destroySession}" /></div>
+<br /><br /><br /> <br /> <br /><br /><br />
+<div align="center">
+<h:form >
+    <p:fieldset legend="Challenges" style="width:650px" > 
+     <p:dataTable var="u" 
+					 value="#{SolutionPropsal.challenges}"
+					 rowKey="#{u.id}" 
+					 paginator="true" 
+					 rows="10"
+					 selection="#{SolutionPropsal.selectedRow}" 
+					 selectionMode="single"
+					 filteredValue="#{SolutionPropsal.filteredCh}" 
+					 id="Table">
+
+			<p:ajax event="rowSelect" 
+					
+				    oncomplete="dialog.show()" />
+
+			
+			
+				<p:column headerText="description" 
+				       sortBy="#{u.description}"
+				      filterBy="#{u.description}" 
+				      id="description"
+					  >
+                      #{u.description}
+           </p:column>
+
+           
+           
+			<p:column headerText="Award" 
+			          sortBy="#{u.award}}"
+				      filterBy="#{u.award}" 
+				      id="award"
+					  >
+                      #{u.award}
+           </p:column>
+           
+           <p:column headerText="Login" 
+           			  sortBy="#{u.submitter.login}"
+				      filterBy="#{u.submitter.login}" 
+				      id="login" >
+                      #{u.submitter.login}
+           </p:column>
+             <p:column headerText="date" 
+					  sortBy="#{u.date}"
+				      filterBy="#{u.date}" 
+				      id="date">
+                      #{u.date}
+           </p:column>
+             <p:column headerText="daedLine" 
+					  sortBy="#{u.deadLine}"
+				      filterBy="#{u.deadLine}" 
+				      id="deadLine">
+                      #{u.deadLine}
+           </p:column>
+
+		</p:dataTable>
+		Click on a challenge to propose a solution
+    </p:fieldset>
+
+    <p:dialog header="Warning" 
+				  widgetVar="dialog"
+			      resizable="false" 
+			      showEffect="fade"
+			      hideEffect="fade">
+			      <h:outputLabel value="U need an account to use the features  " />
+			      <p:commandButton value="Register" onclick="newUser.show()" oncomplete="dialog.hide()" />
+			      </p:dialog>
+    
+    		<p:dialog header="New User" widgetVar="newUser" resizable="false"
+			showEffect="fade" hideEffect="fade">
+
+			<h:panelGrid id="display" columns="2" cellpadding="4">
+
+				<h:outputLabel value="Login" />
+				<h:inputText value="#{manageUsers.newUser.login}" />
+				<h:outputLabel value="Password" />
+				<h:inputText value="#{manageUsers.newUser.passWord}" />
+				<h:outputLabel value="First Name" />
+				<h:inputText value="#{manageUsers.newUser.firstName}" />
+				<h:outputLabel value="Last Name" />
+				<h:inputText value="#{manageUsers.newUser.lastName}" />
+				<p:commandButton actionListener="#{manageUsers.create}" onclick="login.show()"
+					  value="Create Account" />
+
+
+			</h:panelGrid>
+
+		</p:dialog>
+		<p:dialog header="Login" 
+				  widgetVar="login"
+			      resizable="false" 
+			      showEffect="fade"
+			      hideEffect="fade">
+			     
+		<p:panelGrid style="width:400px" columns="2" >
+		
+<f:facet name="header"> 
+Sign In
+</f:facet>
+<h:outputLabel value="Login" />
+<p:inputText id="login" value="#{auth.admin.login}" />
+<h:outputLabel value="Password" />
+<p:inputText id="passWord" value="#{auth.admin.passWord}" />
+<p:commandButton actionListener="#{auth.authentificate}" value="Login" icon="ui-icon-check" style="margin:0" />
+<p:commandButton type="reset" value="Reset" icon="ui-icon-cancel" style="margin:0" />
+
+
+<f:facet name="footer"> 
+* Please Sign in to access the website 
+</f:facet>
+</p:panelGrid></p:dialog></h:form></div>
+        
+</h:body>
+</html>

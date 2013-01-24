@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body>
+  
+          <h:form>
+     <p:fieldset legend="User Info" style="width:650px" > 
+     <p:panelGrid style="width:400px" columns="2" >
+          <h:outputLabel value="First Name" /> 
+      <p:inputText accesskey="first" style="width:500px"  value="#{skills.user.firstName}" />
+       <h:outputLabel value="Last Name" /> 
+        <p:inputText accesskey="last" style="width:500px"  value="#{skills.user.lastName}" />
+        <h:outputLabel value="Login" /> 
+      <p:inputText accesskey="login"   style="width:500px"  value="#{skills.user.login}"  />
+       <h:outputLabel value="Password" /> 
+      <p:inputText type="password" accesskey="pwd" style="width:500px"  value="#{skills.user.passWord}" />
+      <h:outputLabel value="Description" /> 
+    <p:inputText accesskey="skills" style="width:500px"  value="#{skills.user.description}"  />
+     <h:outputLabel value="Skills" /> 
+    <p:inputText accesskey="skills" style="width:500px"  value="#{skills.user.skills}"  />
+     <h:outputLabel value="Interests" /> 
+     <p:inputText accesskey="expericence" style="width:500px" value="#{skills.user.interests}"  />
+
+     <h:outputLabel value="Experience" />		
+     <p:inputText accesskey="expericence" style="width:500px" value="#{skills.user.expericence}"  />
+
+ <p:commandButton   value="Create" icon="ui-icon-check" style="margin:0" />
+<p:commandButton type="reset" value="Reset" icon="ui-icon-cancel" style="margin:0" />
+    </p:panelGrid>
+    </p:fieldset>
+    
+    </h:form>
+  
+
+</body> 
+</html>

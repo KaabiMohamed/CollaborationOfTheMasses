@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/main.css" />
+
+<p:dock position="top" itemWidth="100">
+	<p:menuitem value="Home" icon="/images/home.png" url="http://localhost:2000/WebPrimeFaces/faces/AdminMenu.xhtml"/>
+	<p:menuitem value="Validate Challenge" icon="/images/challenge.png" url="http://localhost:2000/WebPrimeFaces/faces/ValidationPage.xhtml"/>
+    <p:menuitem value="Manage Users" icon="/images/manageUsers.png" url="http://localhost:2000/WebPrimeFaces/faces/Users.xhtml"/>
+    
+</p:dock>
+</h:head>
+
+<h:body>
+#{redirect.testAdmin()}
+<div align="right"><p:commandButton value="Disconnect" actionListener="#{redirect.destroySession}" /></div>
+<br /><br /><br /> <br /> <br /><br /><br />
+<h:form id="form">
+<div align="center">
+     <p:fieldset legend="Validate Challenge" style="width:650px" > 
+     <p:dataTable var="u" 
+					 value="#{ValidateChallenge.chlngs}"
+					 rowKey="#{u.id}" 
+					 paginator="true" 
+					 rows="10"
+					 selection="#{ValidateChallenge.selectedRow}" 
+					 selectionMode="single"
+					 filteredValue="#{ValidateChallenge.filteredChallenges}" 
+					 id="ChallengesTable">
+
+			<p:ajax event="rowSelect" 
+					
+				    oncomplete="dialog.show()" />
+
+			
+			
+				<p:column headerText="Description" >
+                      #{u.description}
+           </p:column>
+
+           
+            <p:column headerText="Award" 
+           			  id="award">
+                      #{u.award}
+           </p:column>
+			<p:column headerText="Start Date" id="startDate" >
+                      #{u.date}
+           </p:column>
+          
+             <p:column headerText="Interests" 
+					   
+				      id="deadLine">
+                      #{u.deadLine}
+           </p:column>
+             <p:column headerText="Submitter" 
+					   
+				      id="submitter">
+                      #{u.submitter.login}
+           </p:column>
+
+		</p:dataTable>
+		Click On the Challenge To validate
+    </p:fieldset>
+</div>
+  <p:dialog header="Confirm Validation" 
+				  widgetVar="dialog"
+			      resizable="false" 
+			      showEffect="fade"
+			      hideEffect="fade">
+ <h:panelGrid id="display" columns="2" cellpadding="4">
+  <h:outputLabel value="Are you sure to validate this challenge ?" />
+  <p:commandButton update="ChallengesTable" actionListener="#{ValidateChallenge.validate}" oncomplete="dialog.hide()" value="Validate" />
+  <h:outputLabel value="Delete this project ? " />
+  
+  <p:commandButton update="ChallengesTable" actionListener="#{ValidateChallenge.delete}" oncomplete="dialog.hide()" value="Delete" />
+ </h:panelGrid>
+  </p:dialog>
+  </h:form>
+  </h:body>
+  </html>     
+        

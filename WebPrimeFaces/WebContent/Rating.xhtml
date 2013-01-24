@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body> 
+#{redirect.testUser()}
+<h:form id="form">  
+  <h:form id="carForm">  
+  
+    <p:fieldset legend="Solution Proposal">  
+        <p:dataTable id="Solution" var="sol" value="#{Rsolution.dataModel}">  
+            <p:column style="width:20px">  
+                <h:outputText id="dragIcon"  
+                    styleClass="ui-icon ui-icon-arrow-4" />  
+                <p:draggable for="dragIcon" revert="true" />  
+            </p:column>  
+  
+            <p:column headerText="Solution">  
+                <h:outputText value="#{sol.description}" />  
+            </p:column>  
+  
+            <p:column headerText="Rating solution">   
+                <p:rating value="#{sol.value}" stars="5" cancel="false" onRate="alert('Thank you for rating the solution. You rated  ' + value)"/>  
+            </p:column>  
+  
+           
+        </p:dataTable>  
+    </p:fieldset>  
+</h:form>  
+</h:form>  
+</body> 
+</html>
