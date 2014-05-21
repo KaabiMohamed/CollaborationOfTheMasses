@@ -25,7 +25,7 @@ import com.restfb.FacebookClient;
 @ManagedBean(name = "auth")
 @SessionScoped
 public class Authentification {
-
+// commit mohamed
 	User user = new User();
 	Administrator admin = new Administrator();
 	@EJB
